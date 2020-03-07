@@ -1,4 +1,4 @@
-# Creating a backend driven component.
+# place components using viewchilds
 
 ## Introduction
 
