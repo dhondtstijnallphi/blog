@@ -8,7 +8,9 @@ Let' us set the scene. A customer has a need for an angular 2+ website where the
 
 The image below gives you a design overview of what we will create.
 
-​ ![Finished screen](https://github.com/dhondtstijnallphi/blog/tree/7e6890bcce8f58179e40a3a53b2fb1ebbcdc9a17/angular/dyncomp/images/ALV.svg)
+ ![Finished screen](./images/ALV.svg)
+
+ ![Finished screen](./images/ALV.png)
 
 A webpage containing 3 section by using the css grid system.
 
