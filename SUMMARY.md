@@ -2,5 +2,5 @@
 
 * [Welcome](README.md)
 * [angular]()
-    * [place components using viewchilds](angular/dyncomp/dynamic-component.md)
+    * [Use viewChild to dynamically load a component](angular/dyncomp/dynamic-component.md)
 
