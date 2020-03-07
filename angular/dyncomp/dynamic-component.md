@@ -1,4 +1,4 @@
-# place components using viewchilds
+# place components using a viewchild
 
 ## Introduction
 
@@ -214,15 +214,6 @@ CSS:
     text-align: end;
   }
 }
-
-table {
-  tr {
-    width: 100%;
-    td {
-      width: 50%;
-    }
-  }
-}
 ```
 
 Typescript:
@@ -256,6 +247,271 @@ export class Design1Component implements OnInit {
       default:
         return '#000000';
     }
+  }
+}
+```
+
+### Card design 2
+
+```bash
+ng g c design2 --project card-designs
+```
+
+using the following design
+
+HTML:
+
+```html
+<mat-card class="example-card">
+  <mat-card-title-group>
+    <mat-card-title class="title">{{ message.description }}</mat-card-title>
+    <mat-card-subtitle class="timestamp">{{ message.timestamp | date }}</mat-card-subtitle>
+    <span class="icon-box" [style.color]="getColor(message.type)">
+      <i class="material-icons">
+        {{ getIcon(message.type) }}
+      </i>
+    </span>
+  </mat-card-title-group>
+
+  <mat-card-content>
+    <mat-card-subtitle>
+      <div class="grid-container">
+        <div class="app">{{ message.application }}</div>
+        <div class="appv">{{ message.version }}</div>
+        <div class="sender">{{ message.sender }}</div>
+        <div class="location">{{ message.location }}</div>
+      </div>
+    </mat-card-subtitle>
+  </mat-card-content>
+</mat-card>
+```
+
+CSS:
+
+```scss
+.example-card {
+  width: 344px;
+  height: 172px;
+  .title {
+    position: absolute;
+    height: 48px;
+    left: 16px;
+    right: 20px;
+    top: 35px;
+  }
+  .timestamp {
+    position: absolute;
+    left: 16px;
+    right: 120px;
+    top: 72px;
+    bottom: 79px;
+  }
+  .icon-box {
+    position: absolute;
+    width: 50px;
+    height: 44px;
+    left: 283px;
+    top: 20px;
+    z-index: 3;
+  }
+}
+
+.grid-container {
+  position: absolute;
+  width: calc(100% - 20px);
+  left: 16px;
+  top: 102px;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'app appv'
+    'sender location';
+  .app {
+    grid-area: app;
+  }
+  .appv {
+    grid-area: appv;
+    text-align: end;
+  }
+  .sender {
+    grid-area: sender;
+  }
+  .location {
+    grid-area: location;
+    text-align: end;
+  }
+}
+
+```
+
+Typescript:
+
+```typescript
+import { Component, OnInit, Input } from '@angular/core';
+import { message } from 'projects/alv-types/src/public-api';
+
+@Component({
+  selector: 'cards-design2',
+  templateUrl: './design2.component.html',
+  styleUrls: ['./design2.component.scss']
+})
+export class Design2Component implements OnInit {
+  @Input() message: message;
+
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  getIcon(type: string): string {
+    switch (type) {
+      case 'Critical':
+        return 'notification_important';
+      case 'Error':
+        return '#error';
+      case 'Warning':
+        return 'warning';
+      case 'Info':
+        return 'info';
+      default:
+        return 'fingerprint';
+    }
+  }
+  
+  getColor(type: string): string {
+    switch (type) {
+      case 'Critical':
+        return '#C62828';
+      case 'Error':
+        return '#EB5757';
+      case 'Warning':
+        return '#F2994A';
+      case 'Info':
+        return '#56CCF2';
+      default:
+        return '#000000';
+    }
+  }
+}
+```
+
+
+
+### Card design 3
+
+```
+ng g c design3 --project card-designs
+```
+
+And it's design
+
+HTML:
+
+```html
+<mat-card class="example-card">
+  <mat-card-title-group>
+    <mat-card-title class="title">{{ message.description }}</mat-card-title>
+    <mat-card-subtitle class="timestamp">{{ message.timestamp | date }}</mat-card-subtitle>
+    <span class="state-box">{{ message.type }}</span>
+  </mat-card-title-group>
+
+  <mat-card-content>
+    <mat-card-subtitle>
+      <div class="grid-container">
+        <div class="app">{{ message.application }}</div>
+        <div class="appv">{{ message.version }}</div>
+        <div class="sender">{{ message.sender }}</div>
+        <div class="location">{{ message.location }}</div>
+      </div>
+    </mat-card-subtitle>
+  </mat-card-content>
+</mat-card>
+```
+
+CSS:
+
+```scss
+.example-card {
+  width: 344px;
+  height: 125px;
+  .title {
+    position: absolute;
+    height: 48px;
+    left: 16px;
+    right: 20px;
+    top: 35px;
+  }
+  .timestamp {
+    position: absolute;
+    left: 16px;
+    right: 120px;
+    top: 72px;
+    bottom: 79px;
+  }
+  .state-box {
+    position: absolute;
+    width: 81px;
+    height: 81px;
+    min-width: 81px;
+    min-height: 81px;
+    left: 234px;
+    top: 12px;
+    text-align: end;
+    z-index: 3;
+  }
+}
+
+.grid-container {
+  position: absolute;
+  width: calc(100% - 20px);
+  left: 16px;
+  top: 102px;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'app appv'
+    'sender location';
+  .app {
+    grid-area: app;
+  }
+  .appv {
+    grid-area: appv;
+    text-align: end;
+  }
+  .sender {
+    grid-area: sender;
+  }
+  .location {
+    grid-area: location;
+    text-align: end;
+  }
+}
+```
+
+Typescript:
+
+```typescript
+import { Component, OnInit, Input, HostBinding } from '@angular/core';
+import { message } from 'projects/alv-types/src/public-api';
+import { coerceCssPixelValue } from '@angular/cdk/coercion';
+
+@Component({
+  selector: 'cards-design3',
+  templateUrl: './design3.component.html',
+  styleUrls: ['./design3.component.scss']
+})
+export class Design3Component implements OnInit {
+  @HostBinding('style.height') height: string;
+  @HostBinding('style.width') width: string;
+
+  @Input() message: message;
+
+  constructor() {}
+
+  ngOnInit(): void {
+    this.height = coerceCssPixelValue(125);
+    this.width = coerceCssPixelValue(344);
   }
 }
 ```
